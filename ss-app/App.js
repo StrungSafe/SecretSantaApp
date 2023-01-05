@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import ViewManager from './viewManager';
+import PageManager from './views/pageManager';
 import Home from './views/home';
 import Settings from './views/settings';
 import AddGifters from './views/addGifters';
@@ -43,17 +43,19 @@ const initState = {
 export default function App() {
   const [sharedState, setSharedState] = useState(initState);
 
-  const onNextViewClick = () => {
-    setSharedState(prev => ({ ...prev, viewId: prev.viewId + 1 }));
-  };
-
   const onResetClick = () => {
     setSharedState(initState);
   };
 
+  const onNextViewClick = () => {
+    setSharedState(prev => ({ ...prev, viewId: prev.viewId + 1 }));
+  };  
+
+  const toggleSetting = () => setSharedState(prev => ({ ...prev, settings: { ...prev.settings, canSelfGift: !prev.settings.canSelfGift }}));
+
   const addGifter = gifter => {
     setSharedState(prev => ({ ...prev, gifters: [...prev.gifters, gifter] }));
-  }
+  };
 
   const onRunClick = () => {
     const {
@@ -67,8 +69,6 @@ export default function App() {
     setSharedState(prev => ({ ...prev, results }));
     onNextViewClick();
   };
-
-  const toggleSetting = () => setSharedState(prev => ({ ...prev, settings: { ...prev.settings, canSelfGift: !prev.settings.canSelfGift }}));
 
   const views = [
     <Home
@@ -96,11 +96,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <ViewManager
+      <PageManager
         viewId={sharedState.viewId}
       >
         {views}
-      </ViewManager>
+      </PageManager>
     </View>
   );
 }
@@ -111,9 +111,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9eceb',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  backgroundImage: {
-    height: 100,
-    width: 100,
   }
 });

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export default function ViewManager(props) {
+export default function PageManager(props) {
     const {
         viewId
     } = props;

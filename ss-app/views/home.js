@@ -8,6 +8,7 @@ export default function Home(props) {
     <View>
         <Text>Secret Santa</Text>
         <Button title="Start" onPress={onStartClick} />
+        <Button title="Scan Results" onPress={() => {}} />
     </View>
   );
 }
