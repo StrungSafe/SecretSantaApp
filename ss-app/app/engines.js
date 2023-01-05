@@ -42,6 +42,7 @@ export const engines = [{
         gifters.map(gifter => {
           let giftee = getGiftee(!settings.canSelfGift, () => isGifterTheGiftee({ giftees, gifter, giftee }));
           results[gifter.value] = giftee;
+          giftees = giftees.filter(g => g.value != giftee.value);
         });
 
         return results;

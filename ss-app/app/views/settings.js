@@ -6,6 +6,7 @@ export default function Settings(props) {
     onNextClick,
     toggleSetting,
     settings: {
+      engine,
       canSelfGift,
     }
   } = props;
@@ -15,6 +16,7 @@ export default function Settings(props) {
   return (
     <View>
         <Text>Settings</Text>
+        <Text>Using Engine {engine}</Text> 
         <Text>Self Gift</Text>
         <Switch
           onValueChange={onValueChange}
