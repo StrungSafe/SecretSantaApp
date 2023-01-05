@@ -3,17 +3,17 @@ import { Text, View, Button } from 'react-native';
 export default function Share(props) {
   const {
     onResetClick,
-    members,
+    gifters,
     results
   } = props;
   return (
     <View>
         <Text>Share Results</Text>
         {
-          members.map(member => (
-            <View key={member.key}>
-              <Text>{member.name}:</Text>
-              <Text>{members.find(m => m.value === results[member.value]).name}</Text>
+          gifters.map(gifter => (
+            <View key={gifter.key}>
+              <Text>{gifter.name}:</Text>
+              <Text>{gifters.find(m => m.value === results[gifter.value]).name}</Text>
             </View>
           ))
         }

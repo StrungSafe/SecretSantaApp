@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import ViewManager from './viewManager';
 import Home from './views/home';
 import Settings from './views/settings';
-import AddMembers from './views/addMembers';
+import AddGifters from './views/addGifters';
 import Share from './views/share';
 import { engines } from './engines';
 
@@ -11,20 +11,19 @@ const initState = {
   viewId: 0,
   settings: {
     engine: 1,
-    canSpouseGift: true,
     canSelfGift: true,
   },
-  members: [{
+  gifters: [{
     key: 'mother',
     name: 'mother',
     value: 'mother',
-    noGift: [ 'father' ] 
-  }, 
+    noGift: ['father']
+  },
   {
     key: 'father',
     name: 'father',
     value: 'father',
-    noGift: [ 'mother' ]
+    noGift: ['mother']
   },
   {
     key: 'son',
@@ -36,7 +35,9 @@ const initState = {
     name: 'daughter',
     value: 'daughter'
   }],
-  results: {},
+  results: {
+    "daughter": "mother"
+  },
 };
 
 export default function App() {
@@ -50,36 +51,44 @@ export default function App() {
     setSharedState(initState);
   };
 
-  const addMember = member => {
-    setSharedState(prev => ({ ...prev, members: [...prev.members, member] }));
+  const addGifter = gifter => {
+    setSharedState(prev => ({ ...prev, gifters: [...prev.gifters, gifter] }));
   }
 
   const onRunClick = () => {
     const {
-      members,
+      gifters: gifters,
       settings,
       settings: {
-        engine
+        engine,
       }
     } = sharedState;
-    const results = engines[engine].process({ settings, members });
+    const results = engines[engine].process({ settings, gifters });
     setSharedState(prev => ({ ...prev, results }));
     onNextViewClick();
   };
 
+  const toggleSetting = () => setSharedState(prev => ({ ...prev, settings: { ...prev.settings, canSelfGift: !prev.settings.canSelfGift }}));
+
   const views = [
     <Home
+      key='home'
       onStartClick={onNextViewClick}
     />,
     <Settings
+      key='setttings'
       onNextClick={onNextViewClick}
+      toggleSetting={toggleSetting}
+      {...sharedState}
     />,
-    <AddMembers
+    <AddGifters
+      key='addGifters'
+      addGifter={addGifter}
       onRunClick={onRunClick}
-      addMember={addMember}
       {...sharedState}
     />,
     <Share
+      key='share'
       onResetClick={onResetClick}
       {...sharedState}
     />
@@ -99,8 +108,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f9eceb',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  backgroundImage: {
+    height: 100,
+    width: 100,
+  }
 });

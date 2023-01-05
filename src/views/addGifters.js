@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Text, View, StyleSheet, Button, TextInput } from 'react-native';
 
-export default function AddMembers(props) {
+export default function AddGifters(props) {
   const {
-    members,
-    addMember,
+    gifters,
+    addGifter,
     onRunClick,
   } = props;
 
@@ -12,11 +12,11 @@ export default function AddMembers(props) {
 
   const onNameChange = value => setName(value);
 
-  const onAddMemberClick = () => {
+  const onAddGifterClick = () => {
     if(!name) {
       return;
     }
-    addMember({
+    addGifter({
       key: name,
       name,
       value: name
@@ -26,11 +26,11 @@ export default function AddMembers(props) {
 
   return (
     <View>
-      <Text>Add Members</Text>
-      <TextInput placeholder='name' onChangeText={onNameChange} />
-      <Button title="Add Member" onPress={onAddMemberClick} />
+      <Text>Add Gifters</Text>
+      <TextInput placeholder='Name' onChangeText={onNameChange} />
+      <Button title="Add Gifter" onPress={onAddGifterClick} />
       {
-        members.map(member => (<Text key={member.key}>{member.name}</Text>))
+        gifters.map(gifter => (<Text key={gifter.key}>{gifter.name}</Text>))
       }
       <Button title="Run" onPress={onRunClick} />
     </View>
