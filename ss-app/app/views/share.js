@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Text, View } from 'react-native';
 import Button from '../button';
 import PageManager from './pageManager';
-import QRCode from 'react-native-qrcode-svg';
+import QRCode from '../QRCode';
 
 export default function Share(props) {
   const {
@@ -42,7 +42,7 @@ export default function Share(props) {
       </PageManager>
       <Button title="Share" onPress={() => { }} />
       <Button title="Start Over" onPress={onResetClick} />
-      <QRCode value='hello world' content='hello world' />
+      <QRCode />
     </View>
   );
 }
