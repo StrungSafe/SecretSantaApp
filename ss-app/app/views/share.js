@@ -24,6 +24,7 @@ export default function Share(props) {
           gifters.map(gifter => {
             const [showing, setShowing] = useState(false);
             const buttonTitle = showing ? 'Hide' : 'Show';
+            const giftee = gifters.find(m => m.value === results[gifter.value]);
             const onPress = value => {
               setShowing(false);
               setViewId(prev => prev + value);
@@ -32,9 +33,12 @@ export default function Share(props) {
               <View key={gifter.key}>
                 <Text>{gifter.name}:</Text>
                 <Button title={buttonTitle} onPress={() => setShowing(prev => !prev)} />
-                { showing && <Text>{gifters.find(m => m.value === results[gifter.value]).name}</Text> }
+                { showing && <Text>{giftee.name}</Text> }
                 { (viewId < viewLength - 1) && <Button title='Next' onPress={() => onPress(1)} /> }
                 { (viewId > 0) && <Button title='Back' onPress={() => onPress(-1)} /> }
+                <QRCode
+                  content={{ type: 'secret-santa', gifter, giftee }}
+                />
               </View>
             );
           })
@@ -42,7 +46,6 @@ export default function Share(props) {
       </PageManager>
       <Button title="Share" onPress={() => { }} />
       <Button title="Start Over" onPress={onResetClick} />
-      <QRCode />
     </View>
   );
 }
