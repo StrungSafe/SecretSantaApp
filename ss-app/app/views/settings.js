@@ -1,4 +1,5 @@
-import { Button, Text, View, Switch } from 'react-native';
+import { Text, View, Switch } from 'react-native';
+import Button from '../button';
 
 export default function Settings(props) {
   const {

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Text, View, StyleSheet, Button, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TextInput } from 'react-native';
+import Button from '../button';
 
 export default function AddGifters(props) {
   const {

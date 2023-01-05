@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import PageManager from './app/views/pageManager';
-import Home from './app/views/home';
-import Settings from './app/views/settings';
-import AddGifters from './app/views/addGifters';
-import Share from './app/views/share';
-import { engines } from './app/engines';
+import PageManager from './views/pageManager';
+import Home from './views/home';
+import Settings from './views/settings';
+import AddGifters from './views/addGifters';
+import Share from './views/share';
+import { engines } from './engines';
 
 const initState = {
   viewId: 0,
@@ -107,7 +107,4 @@ export default function SS() {
 
 const styles = StyleSheet.create({
     flex: 1,
-    backgroundColor: '#f9eceb',
-    alignItems: 'center',
-    justifyContent: 'center',
 });
