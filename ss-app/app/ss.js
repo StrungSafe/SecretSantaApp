@@ -6,6 +6,7 @@ import Settings from './views/settings';
 import AddGifters from './views/addGifters';
 import Share from './views/share';
 import { engines } from './engines';
+import QRScanner from './QRScanner';
 
 const initState = {
   viewId: 0,
@@ -49,17 +50,32 @@ export default function SS() {
 
   const onNextViewClick = () => {
     setSharedState(prev => ({ ...prev, viewId: prev.viewId + 1 }));
-  };  
+  };
 
-  const toggleSetting = () => setSharedState(prev => ({ ...prev, settings: { ...prev.settings, canSelfGift: !prev.settings.canSelfGift }}));
+  const toggleSetting = () => setSharedState(prev => ({ ...prev, settings: { ...prev.settings, canSelfGift: !prev.settings.canSelfGift } }));
 
   const addGifter = gifter => {
     setSharedState(prev => ({ ...prev, gifters: [...prev.gifters, gifter] }));
   };
 
+  const handleBarCodeScanned = ({ type: scanType, data = {} }) => {
+    const {
+      type,
+      gifter,
+      giftee
+    } = JSON.parse(data);
+    if (type === 'secret-santa') {
+      const gifters = [gifter, giftee];
+      const results = {
+        [gifter.value]: giftee.value
+      };
+      setSharedState(prev => ({ ...prev, gifters, results, viewId: 3 }));
+    }
+  };
+
   const onRunClick = () => {
     const {
-      gifters: gifters,
+      gifters,
       settings,
       settings: {
         engine,
@@ -74,6 +90,7 @@ export default function SS() {
     <Home
       key='home'
       onStartClick={onNextViewClick}
+      handleBarCodeScanned={handleBarCodeScanned}
     />,
     <Settings
       key='setttings'
@@ -106,5 +123,8 @@ export default function SS() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    ...StyleSheet.absoluteFillObject,
     flex: 1,
+  }
 });
