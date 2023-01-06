@@ -2,17 +2,17 @@ import { Button, View, StyleSheet } from 'react-native';
 
 export default function ButtonWrapper(props) {
   const {
-    style
+    style,
   } = props;
   return (
     <View style={style ?? styles.default}>
-        <Button {...props} />
+        <Button color={style?.color} {...props} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
     default: {
-        padding: 5
+        padding: 5,        
     }
 });

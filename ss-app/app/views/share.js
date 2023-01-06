@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Text, View } from 'react-native';
 import Button from '../button';
-import PageManager from './pageManager';
+import PageManager from '../pageManager';
 import QRCode from '../QRCode';
+import { MessageAppCodeType } from '../constants';
 
 export default function Share(props) {
   const {
@@ -36,7 +37,7 @@ export default function Share(props) {
         <Button title={shareButtonTitle} onPress={() => setSharing(prev => !prev)} />
         {sharing &&
           <QRCode
-            value={JSON.stringify({ type: 'secret-santa', gifter, giftee })}
+            value={JSON.stringify({ type: MessageAppCodeType, gifter, giftee })}
           />
         }
 

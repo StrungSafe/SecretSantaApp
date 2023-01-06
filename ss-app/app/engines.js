@@ -1,3 +1,5 @@
+import { ExceptionTypes } from "./constants";
+
 export const engines = [{
   // 0
   // Just pops the next giftee...not a very good secret santa generator
@@ -20,7 +22,7 @@ export const engines = [{
     const isGifterTheGiftee = ({ giftees, gifter, giftee }) => {
       const isGifterTheGiftee = giftee === gifter.value;
       if (isGifterTheGiftee && giftees.length === 1) {
-        throw { type: 'isGifterTheGiftee', retry: true };
+        throw ExceptionTypes.OutOfGifteesException;
       }
       return isGifterTheGiftee;
     };
@@ -35,12 +37,12 @@ export const engines = [{
           do {
             const index = Math.floor(Math.random() * giftees.length);
             giftee = giftees[index].value;
-          } while (runRule && stopRule());
+          } while (runRule && stopRule(giftee));
           return giftee;
         };
 
         gifters.map(gifter => {
-          let giftee = getGiftee(!settings.canSelfGift, () => isGifterTheGiftee({ giftees, gifter, giftee }));
+          let giftee = getGiftee(!settings.canSelfGift, giftee => isGifterTheGiftee({ giftees, gifter, giftee }));
           results[gifter.value] = giftee;
           giftees = giftees.filter(g => g.value != giftee.value);
         });

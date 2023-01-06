@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import PageManager from './views/pageManager';
+import PageManager from './pageManager';
 import Home from './views/home';
 import Settings from './views/settings';
 import AddGifters from './views/addGifters';
 import Share from './views/share';
 import { engines } from './engines';
-import QRScanner from './QRScanner';
+import { MessageAppCodeType } from './constants';
 
 const initState = {
   viewId: 0,
@@ -64,7 +64,7 @@ export default function SS() {
       gifter,
       giftee
     } = JSON.parse(data);
-    if (type === 'secret-santa') {
+    if (type === MessageAppCodeType) {
       const gifters = [gifter, giftee];
       const results = {
         [gifter.value]: giftee.value
