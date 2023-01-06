@@ -3,13 +3,13 @@ import { View, StyleSheet } from 'react-native';
 import PageManager from './pageManager';
 import Home from './views/home';
 import Settings from './views/settings';
-import AddGifters from './views/addGifters';
+import Add from './views/add';
 import Share from './views/share';
 import { engines } from './engines';
 import { MessageAppCodeType } from './constants';
 
 const initState = {
-  viewId: 0,
+  viewId: 3,
   settings: {
     engine: 1,
     canSelfGift: true,
@@ -98,7 +98,7 @@ export default function SS() {
       toggleSetting={toggleSetting}
       {...sharedState}
     />,
-    <AddGifters
+    <Add
       key='addGifters'
       addGifter={addGifter}
       onRunClick={onRunClick}
@@ -115,6 +115,7 @@ export default function SS() {
     <View style={styles.container}>
       <PageManager
         viewId={sharedState.viewId}
+        style={styles.pager}
       >
         {views}
       </PageManager>
@@ -124,7 +125,9 @@ export default function SS() {
 
 const styles = StyleSheet.create({
   container: {
-    ...StyleSheet.absoluteFillObject,
     flex: 1,
-  }
+  },
+  page: {
+    flex: 1,
+  },
 });

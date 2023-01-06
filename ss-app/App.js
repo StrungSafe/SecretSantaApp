@@ -11,7 +11,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    ...StyleSheet.absoluteFillObject,
     flex: 1,
     backgroundColor: '#f9eceb',
     alignItems: 'center',

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Text, View, StyleSheet, TextInput } from 'react-native';
 import Button from '../button';
 
-export default function AddGifters(props) {
+export default function Add(props) {
   const {
     gifters,
     addGifter,
