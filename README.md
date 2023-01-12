@@ -6,6 +6,13 @@ An app to make Secret Santa (SS) a breeze
 
 * React Native
 
+## Non-Functional Requirements
+* Works on Android at least
+* Reasonably fast
+* Intuitive
+* Simple defaults
+* Potential for more advanced settings
+
 ## Functional Requirements
 * Able to add gifters to SS list
 * Able to generate a gifter to giftee following SS rules
@@ -14,10 +21,3 @@ An app to make Secret Santa (SS) a breeze
 * Configurable setting to ensure gifters can't self gift
 * Configurable setting to ensure gifters might not gift a particular gifter like their spouse
     * Able to add and associate the users for setting
-
-## Non-Functional Requirements
-* Works on Android and Web
-* Reasonably fast
-* Intuitive
-* Simple defaults
-* Potential for more advanced settings
