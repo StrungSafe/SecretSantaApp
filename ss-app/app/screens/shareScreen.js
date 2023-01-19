@@ -6,7 +6,7 @@ import ShareGifter from './shareGifter';
 
 import defaultStyles from './styles';
 
-export default function Share(props) {
+export default function ShareScreen(props) {
   const {
     onResetClick,
     gifters,

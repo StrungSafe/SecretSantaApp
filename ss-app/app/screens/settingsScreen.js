@@ -3,7 +3,7 @@ import Button from '../components/button';
 
 import defaultStyles from './styles';
 
-export default function Settings(props) {
+export default function SettingsScreen(props) {
   const {
     onNextClick,
     toggleSetting,

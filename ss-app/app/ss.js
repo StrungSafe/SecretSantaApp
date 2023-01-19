@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import PageManager from './components/pageManager';
-import Home from './views/home';
-import Settings from './views/settings';
-import Add from './views/add';
-import Share from './views/share';
+import HomeScreen from './screens/homeScreen';
+import SettingsScreen from './screens/settingsScreen';
+import AddScreen from './screens/addScreen';
+import ShareScreen from './screens/shareScreen';
 import { engines } from './engines';
 import { MessageAppCodeType } from './constants';
 
@@ -87,24 +87,24 @@ export default function SS() {
   };
 
   const views = [
-    <Home
+    <HomeScreen
       key='home'
       onStartClick={onNextViewClick}
       handleBarCodeScanned={handleBarCodeScanned}
     />,
-    <Settings
+    <SettingsScreen
       key='setttings'
       onNextClick={onNextViewClick}
       toggleSetting={toggleSetting}
       {...sharedState}
     />,
-    <Add
+    <AddScreen
       key='addGifters'
       addGifter={addGifter}
       onRunClick={onRunClick}
       {...sharedState}
     />,
-    <Share
+    <ShareScreen
       key='share'
       onResetClick={onResetClick}
       {...sharedState}

@@ -5,17 +5,21 @@ import QRScanner from '../components/QRScanner';
 
 import defaultStyles from './styles';
 
-export default function Home(props) {
-  const {
-    onStartClick,
-    handleBarCodeScanned
-  } = props;
+export default function HomeScreen({ navigation, route }) {
+  // const {
+  //   // onStartClick,
+  //   handleBarCodeScanned
+  // } = props;
 
   const [showScanner, setShowScanner] = useState(false);
 
   const onBarCodeScanned = value => {
-    handleBarCodeScanned(value);
+    // handleBarCodeScanned(value);
     setShowScanner(false);
+  };
+
+  const onStartClick = () => {
+    navigation.navigate('Settings');
   };
 
   const toggleScannerButtonTitle = showScanner ? "Hide": "Open Camera";

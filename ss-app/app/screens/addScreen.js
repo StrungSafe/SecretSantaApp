@@ -4,7 +4,7 @@ import Button from '../components/button';
 
 import defaultStyles from './styles';
 
-export default function Add(props) {
+export default function AddScreen(props) {
   const {
     gifters,
     addGifter,
