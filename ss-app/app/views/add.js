@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Text, View, StyleSheet, TextInput } from 'react-native';
-import Button from '../button';
+import Button from '../components/button';
+
+import defaultStyles from './styles';
 
 export default function Add(props) {
   const {
@@ -26,17 +28,37 @@ export default function Add(props) {
   };
 
   return (
-    <View>
-      <Text>Add Gifters</Text>
-      <TextInput placeholder='Name' onChangeText={onNameChange} />
-      <Button title="Add Gifter" onPress={onAddGifterClick} />
+    <View
+      style={styles.container}
+    >
+      <Text style={styles.header} >
+        Add Gifters
+      </Text>
+      <TextInput style={styles.name} placeholder='Name' onChangeText={onNameChange} value={name} />
+      <Button style={styles.add} title="Add Gifter" onPress={onAddGifterClick} />
       {
-        gifters.map(gifter => (<Text key={gifter.key}>{gifter.name}</Text>))
+        gifters.map(gifter => (<Text style={styles.gifter} key={gifter.key}>{gifter.name}</Text>))
       }
-      <Button title="Run" onPress={onRunClick} />
+      <Button style={styles.run} title="Run" onPress={onRunClick} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    ...defaultStyles.container,
+    flex: 1,
+  },
+  header: {
+    ...defaultStyles.header,
+    flex: 1,
+  },
+  add: {
+    ...defaultStyles.button,
+    flex: 2,
+  },
+  run: {
+    ...defaultStyles.button,
+    flex: 2,
+  }
 });

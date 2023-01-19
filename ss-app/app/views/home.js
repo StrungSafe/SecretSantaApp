@@ -1,7 +1,9 @@
 import { Text, View, StyleSheet } from 'react-native';
 import { useState } from 'react';
-import Button from '../button';
-import QRScanner from '../QRScanner';
+import Button from '../components/button';
+import QRScanner from '../components/QRScanner';
+
+import defaultStyles from './styles';
 
 export default function Home(props) {
   const {
@@ -21,48 +23,46 @@ export default function Home(props) {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Secret Santa</Text>
-      <Button style={styles.start} title="Start" onPress={onStartClick} />
-      <Button
-        style={styles.toggleScannerBtn}
-        title={toggleScannerButtonTitle}
-        onPress={() => setShowScanner(prev => !prev)}
-      />
-      <QRScanner
-        onBarCodeScanned={onBarCodeScanned}
-        show={showScanner}
-        style={styles.qrScanner}
-      />
+      <View
+        style={styles.body}
+      >
+        <Button style={styles.start} title="Start" onPress={onStartClick} />
+        <Button
+          style={styles.toggleScannerBtn}
+          title={toggleScannerButtonTitle}
+          onPress={() => setShowScanner(prev => !prev)}
+        />
+        <QRScanner
+          onBarCodeScanned={onBarCodeScanned}
+          show={showScanner}
+          style={styles.qrScanner}
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    ...defaultStyles.container,
     flex: 1,
   },
   header: {
+    ...defaultStyles.header,
     flex: 1,
-    paddingTop: 50,
-    paddingBottom: 20,
-    textAlign: 'center',
-    fontSize: 30,
-    color: 'red',
-    fontWeight: 'bold',
+  },
+  body: {
+    flex: 3,
   },
   start: {
-    flex: 1,
+    ...defaultStyles.button,
     paddingBottom: 20,
-    width: '66%',
-    alignSelf: 'center',
-    color: 'red',
   },
   toggleScannerBtn: {
-    flex: 2,
-    width: '66%',
-    alignSelf: 'center',
-    color: 'red',
+    ...defaultStyles.button,
   },
   qrScanner: {
-    ...StyleSheet.absoluteFillObject,
+    ...defaultStyles.absoluteFillObject,
+    marginTop: 75,
   },
 });

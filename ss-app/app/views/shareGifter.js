@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import Button from '../button';
-import QRCode from '../QRCode';
+import Button from '../components/button';
+import QRCode from '../components/QRCode';
 import { MessageAppCodeType } from '../constants';
+
+import defaultStyles from './styles';
 
 export default function ShareGifter(props) {
     const {
-        style,
         viewId,
         viewLength,
         setViewId,
@@ -28,24 +29,27 @@ export default function ShareGifter(props) {
     }
     return (
         <View
+            style={styles.container}
             key={gifter.key}
-            styles={style ?? styles.container}
         >
-            <Text style={styles.header}>{gifter.name}</Text>
+            <Text style={styles.name}>{gifter.name}</Text>
 
-            <Button title={showButtonTitle} onPress={() => setShowing(prev => !prev)} />
+            <Button style={styles.show} title={showButtonTitle} onPress={() => setShowing(prev => !prev)} />
             {showing && <Text>{giftee.name}</Text>}
 
-            <Button title={shareButtonTitle} onPress={() => setSharing(prev => !prev)} />
+            <Button style={styles.share} title={shareButtonTitle} onPress={() => setSharing(prev => !prev)} />
             {sharing &&
                 <QRCode
+                    style={styles.code}
                     value={JSON.stringify({ type: MessageAppCodeType, gifter, giftee })}
                 />
             }
-
-            {(viewId > 0) && <Button title='Back' onPress={() => onPress(-1)} />}
-            {(viewId < viewLength - 1) && <Button title='Next' onPress={() => onPress(1)} />}
-            <Button title='test' />
+            <View
+                style={styles.backNext}
+            >
+                {(viewId > 0) && <Button style={styles.back} title='Back' onPress={() => onPress(-1)} />}
+                {(viewId < viewLength - 1) && <Button style={styles.next} title='Next' onPress={() => onPress(1)} />}
+            </View>
         </View>
     );
 }
@@ -53,6 +57,28 @@ export default function ShareGifter(props) {
 const styles = StyleSheet.create({
     container: {
     },
-    header: {
+    name: {
     },
+    show: {
+        ...defaultStyles.button,
+    },
+    share: {
+        ...defaultStyles.button,
+    },
+    code: {
+        ...defaultStyles.button,
+    },
+    backNext: {
+        flexDirection: 'row',
+        width: '66%',
+        alignContent: 'center'
+    },
+    back: {
+        ...defaultStyles.button,
+        flex: 1,
+    },
+    next: {
+        ...defaultStyles.button,
+        flex: 1,
+    }
 });

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import PageManager from './pageManager';
+import PageManager from './components/pageManager';
 import Home from './views/home';
 import Settings from './views/settings';
 import Add from './views/add';
@@ -45,7 +45,6 @@ export default function SS() {
   const [sharedState, setSharedState] = useState(initState);
 
   const onResetClick = () => {
-    console.log('reset', initState);
     setSharedState(initState);
   };
 
@@ -126,6 +125,7 @@ export default function SS() {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 20,
   },
   page: {
   },

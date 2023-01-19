@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import Button from '../button';
-import PageManager from '../pageManager';
+import Button from '../components/button';
+import PageManager from '../components/pageManager';
 import ShareGifter from './shareGifter';
+
+import defaultStyles from './styles';
 
 export default function Share(props) {
   const {
@@ -19,46 +21,59 @@ export default function Share(props) {
       style={styles.container}
     >
       <Text
-        styles={styles.header}
+        style={styles.header}
       >
         Share Results
       </Text>
-      <PageManager
-        viewId={viewId}
-        styles={styles.pager}
+      <View
+        style={styles.body}
       >
-        {
-          gifters.map(gifter => 
-            <ShareGifter
-              key={gifter.key} 
-              style={styles.share}
-              viewId={viewId} 
-              viewLength={viewLength} 
-              setViewId={setViewId} 
-              gifter={gifter} 
-              gifters={gifters} 
-              results={results} 
-            />)
-        }
-      </PageManager>
-      <Button
-        title="Start Over"
-        onPress={onResetClick}
-        style={styles.startOver}
-      />
+        <PageManager
+          style={styles.pager}
+          viewId={viewId}
+        >
+          {
+            gifters.map(gifter => 
+              <ShareGifter
+                style={styles.gifter}
+                key={gifter.key} 
+                viewId={viewId} 
+                viewLength={viewLength} 
+                setViewId={setViewId} 
+                gifter={gifter} 
+                gifters={gifters} 
+                results={results} 
+              />)
+          }
+        </PageManager>
+        <Button
+          style={styles.startOver}
+          title="Start Over"
+          onPress={onResetClick}
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    ...defaultStyles.container,
+    flex: 1,
   },
   header: {
+    ...defaultStyles.header,
+    flex: 1,
+  },
+  body: {
+    flex: 3,
   },
   pager: {
   },
-  share: {
+  gifter: {
   },
   startOver: {
+    ...defaultStyles.button,
+    paddingTop: 10,
   },
 });
