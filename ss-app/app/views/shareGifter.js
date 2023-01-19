@@ -52,9 +52,7 @@ export default function ShareGifter(props) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
     },
     header: {
-
     },
 });

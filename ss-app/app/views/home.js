@@ -38,7 +38,6 @@ export default function Home(props) {
 
 const styles = StyleSheet.create({
   container: {
-    ...StyleSheet.absoluteFillObject,
     flex: 1,
   },
   header: {

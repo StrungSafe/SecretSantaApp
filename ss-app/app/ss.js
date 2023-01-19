@@ -9,7 +9,7 @@ import { engines } from './engines';
 import { MessageAppCodeType } from './constants';
 
 const initState = {
-  viewId: 3,
+  viewId: 0,
   settings: {
     engine: 1,
     canSelfGift: true,
@@ -45,6 +45,7 @@ export default function SS() {
   const [sharedState, setSharedState] = useState(initState);
 
   const onResetClick = () => {
+    console.log('reset', initState);
     setSharedState(initState);
   };
 
@@ -125,9 +126,7 @@ export default function SS() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
   },
   page: {
-    flex: 1,
   },
 });

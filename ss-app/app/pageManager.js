@@ -16,7 +16,5 @@ export default function PageManager(props) {
 
 const styles = StyleSheet.create({
     default: {
-        ...StyleSheet.absoluteFillObject,
-        flex: 1
     }
 });

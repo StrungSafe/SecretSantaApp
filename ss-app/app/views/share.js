@@ -52,18 +52,13 @@ export default function Share(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
   },
   header: {
-    flex: 1,
   },
   pager: {
-    flex: 2,
   },
   share: {
-    flex: 1,
   },
   startOver: {
-    flex: 1,
   },
 });
