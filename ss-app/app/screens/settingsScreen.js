@@ -1,33 +1,36 @@
-import { Text, View, Switch, StyleSheet } from 'react-native';
+import { Text, View, Switch, StyleSheet, SafeAreaView } from 'react-native';
+import { useState } from 'react';
 import Button from '../components/button';
+import { DefaultSettings } from '../constants';
 
 import defaultStyles from './styles';
 
 export default function SettingsScreen(props) {
   const {
-    onNextClick,
-    toggleSetting,
-    settings: {
-      engine,
-      canSelfGift,
-    }
+    navigation,
   } = props;
 
-  const onValueChange = toggleSetting;
+  const [settings, setSettings] = useState(DefaultSettings);
+
+  const onNextClick = () => navigation.navigate('Add', { settings });
+
+  const toggleSetting = () => {
+    setSettings(prev => ({ ...prev, canSelfGift: !prev.canSelfGift }));
+  };
 
   return (
-    <View
+    <SafeAreaView
       style={styles.container}
     >
         <Text style={styles.header}>Settings</Text>
         <View
           style={styles.body}
         >
-          <Text>Using Engine {engine}</Text> 
+          <Text>Using Engine {settings.engine}</Text> 
           <Text>Self Gift</Text>
           <Switch
-            onValueChange={onValueChange}
-            value={canSelfGift}
+            onValueChange={toggleSetting}
+            value={settings.canSelfGift}
           />
           <Button
             style={styles.next}
@@ -35,7 +38,7 @@ export default function SettingsScreen(props) {
             onPress={onNextClick} 
           />
         </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

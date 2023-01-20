@@ -1,20 +1,31 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, SafeAreaView } from 'react-native';
 import { useState } from 'react';
 import Button from '../components/button';
 import QRScanner from '../components/QRScanner';
+import { MessageAppCodeType } from '../constants';
 
 import defaultStyles from './styles';
 
-export default function HomeScreen({ navigation, route }) {
-  // const {
-  //   // onStartClick,
-  //   handleBarCodeScanned
-  // } = props;
+export default function HomeScreen(props) {
+  const {
+    navigation
+  } = props;
 
   const [showScanner, setShowScanner] = useState(false);
 
-  const onBarCodeScanned = value => {
-    // handleBarCodeScanned(value);
+  const onBarCodeScanned = ({ type: scanType, data = {} }) => {
+    const {
+      type,
+      gifter,
+      giftee
+    } = JSON.parse(data);
+    if (type === MessageAppCodeType) {
+      const gifters = [gifter, giftee];
+      const results = {
+        [gifter.value]: giftee.value
+      };
+      navigation.navigate('Share', { gifters, results })
+    }
     setShowScanner(false);
   };
 
@@ -22,10 +33,10 @@ export default function HomeScreen({ navigation, route }) {
     navigation.navigate('Settings');
   };
 
-  const toggleScannerButtonTitle = showScanner ? "Hide": "Open Camera";
+  const toggleScannerButtonTitle = showScanner ? "Hide" : "Open Camera";
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.header}>Secret Santa</Text>
       <View
         style={styles.body}
@@ -42,7 +53,7 @@ export default function HomeScreen({ navigation, route }) {
           style={styles.qrScanner}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

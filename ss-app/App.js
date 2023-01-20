@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from './app/screens/homeScreen';
 import SettingsScreen from './app/screens/settingsScreen';
@@ -14,9 +14,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='Home' component={HomeScreen} option={{ title: 'Hello World' }} />
+        <Stack.Screen name='Home' component={HomeScreen} options={{ title: 'Secret Santa App' }} />
         <Stack.Screen name='Settings' component={SettingsScreen} />
-        <Stack.Screen name='Add' component={AddScreen} />
+        <Stack.Screen name='Add' component={AddScreen} options={{ title: 'Add Gifters' }} />
         <Stack.Screen name='Share' component={ShareScreen} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,23 +1,30 @@
 import { useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, SafeAreaView } from 'react-native';
 import Button from '../components/button';
 import PageManager from '../components/pageManager';
-import ShareGifter from './shareGifter';
+import ShareGifter from '../components/shareGifter';
 
 import defaultStyles from './styles';
 
 export default function ShareScreen(props) {
   const {
-    onResetClick,
-    gifters,
-    results
+    navigation,
+    route: {
+      params: {
+        gifters,
+        results,
+      },
+    },
   } = props;
 
   const [viewId, setViewId] = useState(0);
+
+  const onResetClick = () => navigation.navigate('Home');
+
   const viewLength = gifters.length;
 
   return (
-    <View
+    <SafeAreaView
       style={styles.container}
     >
       <Text
@@ -52,7 +59,7 @@ export default function ShareScreen(props) {
           onPress={onResetClick}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

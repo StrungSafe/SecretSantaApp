@@ -1,34 +1,41 @@
 import { useState } from 'react';
-import { Text, View, StyleSheet, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TextInput, SafeAreaView } from 'react-native';
 import Button from '../components/button';
+import { engines } from '../engines';
+import { TestingData } from '../constants';
 
 import defaultStyles from './styles';
 
 export default function AddScreen(props) {
   const {
-    gifters,
-    addGifter,
-    onRunClick,
+    navigation,
+    route: {
+      params: {
+        settings,
+      },
+    },
   } = props;
 
   const [name, setName] = useState('');
+  const [gifters, setGifters] = useState(TestingData);
 
   const onNameChange = value => setName(value);
 
   const onAddGifterClick = () => {
-    if(!name) {
+    if (!name) {
       return;
     }
-    addGifter({
-      key: name,
-      name,
-      value: name
-    });
+    setGifters(prev => [...prev, { key: name, name, value: name }]);
     setName('');
   };
 
+  const onRunClick = () => {
+    const results = engines[settings.engine].process({ settings, gifters });
+    navigation.navigate('Share', { settings, gifters, results });
+  };
+
   return (
-    <View
+    <SafeAreaView
       style={styles.container}
     >
       <Text style={styles.header} >
@@ -40,7 +47,7 @@ export default function AddScreen(props) {
         gifters.map(gifter => (<Text style={styles.gifter} key={gifter.key}>{gifter.name}</Text>))
       }
       <Button style={styles.run} title="Run" onPress={onRunClick} />
-    </View>
+    </SafeAreaView>
   );
 }
 

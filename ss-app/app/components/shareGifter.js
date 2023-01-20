@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import Button from '../components/button';
-import QRCode from '../components/QRCode';
+import Button from './button';
+import QRCode from './QRCode';
 import { MessageAppCodeType } from '../constants';
 
-import defaultStyles from './styles';
+import defaultStyles from '../screens/styles';
 
 export default function ShareGifter(props) {
     const {

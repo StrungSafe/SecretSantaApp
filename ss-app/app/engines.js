@@ -57,4 +57,10 @@ export const engines = [{
 
     return mapGiftersAndGiftees({ settings, gifters });
   }
+}, {
+  // 2
+  // For TESTING exception handling
+  process: () => {
+    throw ExceptionTypes.OutOfGifteesException;
+  }
 }];
