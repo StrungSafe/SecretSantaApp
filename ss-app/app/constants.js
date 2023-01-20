@@ -1,9 +1,5 @@
 export const MessageAppCodeType = 'secret-santa';
 
-export const ExceptionTypes = {
-    OutOfGifteesException: { type: 'OutOfGifteesException', retry: true }
-};
-
 export const DefaultSettings = {
     engine: 1,
     canSelfGift: true,

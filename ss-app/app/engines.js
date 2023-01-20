@@ -1,9 +1,19 @@
-import { ExceptionTypes } from "./constants";
+import { ExceptionTypes } from "./exceptions";
 
-export const engines = [{
+export const engineFactory = key => {
+  const engine = Engines.find(engine => engine.key == key);
+  if(!engine) {
+    throw ExceptionTypes.InvalidEngineConfigurationException
+  }
+  return engine;
+};
+
+export const Engines = [{
   // 0
   // Just pops the next giftee...not a very good secret santa generator
   // Better for testing and iterative design
+  key: 0,
+  name: 'v0',
   process: ({ settings, gifters }) => {
     const giftees = [...gifters];
     const results = {};
@@ -18,6 +28,8 @@ export const engines = [{
   // Consumes settings to enable features
   // SelfGifting (canSelfGift): Can a person self gift?
   // TODO: Other ppl gifting restrictions, make it arbitrary
+  key: 1,
+  name: 'v1',
   process: ({ settings, gifters }) => {
     const isGifterTheGiftee = ({ giftees, gifter, giftee }) => {
       const isGifterTheGiftee = giftee === gifter.value;
@@ -60,6 +72,8 @@ export const engines = [{
 }, {
   // 2
   // For TESTING exception handling
+  key: 2,
+  name: 'Exception Testing Engine v1',
   process: () => {
     throw ExceptionTypes.OutOfGifteesException;
   }

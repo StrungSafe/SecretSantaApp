@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Text, StyleSheet, TextInput, SafeAreaView } from 'react-native';
 import Button from '../components/button';
-import { engines } from '../engines';
+import { engineFactory } from '../engines';
 import { TestingData } from '../constants';
 
 import defaultStyles from './styles';
@@ -30,7 +30,7 @@ export default function AddScreen(props) {
   };
 
   const onRunClick = () => {
-    const results = engines[settings.engine].process({ settings, gifters });
+    const results = engineFactory(settings.engine).process({ settings, gifters });
     navigation.navigate('Share', { settings, gifters, results });
   };
 
