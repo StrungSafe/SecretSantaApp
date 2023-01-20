@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import Button from './button';
-import QRCode from './QRCode';
-import { MessageAppCodeType } from '../constants';
+import Button from '../../components/button';
+import QRCode from '../../components/QRCode';
+import { MessageAppCodeType } from '../../constants';
 
-import defaultStyles from '../screens/styles';
+import defaultStyles from '../styles';
 
-export default function ShareGifter(props) {
+export default function Share(props) {
     const {
         viewId,
         viewLength,
@@ -44,12 +44,7 @@ export default function ShareGifter(props) {
                     value={JSON.stringify({ type: MessageAppCodeType, gifter, giftee })}
                 />
             }
-            <View
-                style={styles.backNext}
-            >
-                {(viewId > 0) && <Button style={styles.back} title='Back' onPress={() => onPress(-1)} />}
-                {(viewId < viewLength - 1) && <Button style={styles.next} title='Next' onPress={() => onPress(1)} />}
-            </View>
+            
         </View>
     );
 }

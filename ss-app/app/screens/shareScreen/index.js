@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
-import Button from '../components/button';
-import PageManager from '../components/pageManager';
-import ShareGifter from '../components/shareGifter';
+import Button from '../../components/button';
+import PageManager from '../../components/pageManager';
+import Share from './share';
 
-import defaultStyles from './styles';
+import defaultStyles from '../styles';
 
 export default function ShareScreen(props) {
   const {
@@ -30,10 +30,11 @@ export default function ShareScreen(props) {
       <PageManager
         style={styles.pager}
         viewId={viewId}
+        setViewId={setViewId}
       >
         {
           gifters.map(gifter =>
-            <ShareGifter
+            <Share
               style={styles.gifter}
               key={gifter.key}
               viewId={viewId}
