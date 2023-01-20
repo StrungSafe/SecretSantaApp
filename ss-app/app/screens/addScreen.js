@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, View, StyleSheet, TextInput, SafeAreaView } from 'react-native';
+import { Text, StyleSheet, TextInput, SafeAreaView } from 'react-native';
 import Button from '../components/button';
 import { engines } from '../engines';
 import { TestingData } from '../constants';
@@ -38,9 +38,6 @@ export default function AddScreen(props) {
     <SafeAreaView
       style={styles.container}
     >
-      <Text style={styles.header} >
-        Add Gifters
-      </Text>
       <TextInput style={styles.name} placeholder='Name' onChangeText={onNameChange} value={name} />
       <Button style={styles.add} title="Add Gifter" onPress={onAddGifterClick} />
       {
@@ -55,10 +52,7 @@ const styles = StyleSheet.create({
   container: {
     ...defaultStyles.container,
     flex: 1,
-  },
-  header: {
-    ...defaultStyles.header,
-    flex: 1,
+    justifyContent: 'center'
   },
   add: {
     ...defaultStyles.button,

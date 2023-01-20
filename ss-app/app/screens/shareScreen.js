@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, View, StyleSheet, SafeAreaView } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import Button from '../components/button';
 import PageManager from '../components/pageManager';
 import ShareGifter from '../components/shareGifter';
@@ -27,38 +27,29 @@ export default function ShareScreen(props) {
     <SafeAreaView
       style={styles.container}
     >
-      <Text
-        style={styles.header}
+      <PageManager
+        style={styles.pager}
+        viewId={viewId}
       >
-        Share Results
-      </Text>
-      <View
-        style={styles.body}
-      >
-        <PageManager
-          style={styles.pager}
-          viewId={viewId}
-        >
-          {
-            gifters.map(gifter => 
-              <ShareGifter
-                style={styles.gifter}
-                key={gifter.key} 
-                viewId={viewId} 
-                viewLength={viewLength} 
-                setViewId={setViewId} 
-                gifter={gifter} 
-                gifters={gifters} 
-                results={results} 
-              />)
-          }
-        </PageManager>
-        <Button
-          style={styles.startOver}
-          title="Start Over"
-          onPress={onResetClick}
-        />
-      </View>
+        {
+          gifters.map(gifter =>
+            <ShareGifter
+              style={styles.gifter}
+              key={gifter.key}
+              viewId={viewId}
+              viewLength={viewLength}
+              setViewId={setViewId}
+              gifter={gifter}
+              gifters={gifters}
+              results={results}
+            />)
+        }
+      </PageManager>
+      <Button
+        style={styles.startOver}
+        title='Start Over'
+        onPress={onResetClick}
+      />
     </SafeAreaView>
   );
 }
@@ -67,13 +58,7 @@ const styles = StyleSheet.create({
   container: {
     ...defaultStyles.container,
     flex: 1,
-  },
-  header: {
-    ...defaultStyles.header,
-    flex: 1,
-  },
-  body: {
-    flex: 3,
+    justifyContent: 'center',
   },
   pager: {
   },

@@ -1,4 +1,4 @@
-import { Text, View, Switch, StyleSheet, SafeAreaView } from 'react-native';
+import { Text, Switch, StyleSheet, SafeAreaView } from 'react-native';
 import { useState } from 'react';
 import Button from '../components/button';
 import { DefaultSettings } from '../constants';
@@ -22,22 +22,17 @@ export default function SettingsScreen(props) {
     <SafeAreaView
       style={styles.container}
     >
-        <Text style={styles.header}>Settings</Text>
-        <View
-          style={styles.body}
-        >
-          <Text>Using Engine {settings.engine}</Text> 
-          <Text>Self Gift</Text>
-          <Switch
-            onValueChange={toggleSetting}
-            value={settings.canSelfGift}
-          />
-          <Button
-            style={styles.next}
-            title="Next"
-            onPress={onNextClick} 
-          />
-        </View>
+      <Text>Using Engine {settings.engine}</Text>
+      <Text>Self Gift</Text>
+      <Switch
+        onValueChange={toggleSetting}
+        value={settings.canSelfGift}
+      />
+      <Button
+        style={styles.next}
+        title="Next"
+        onPress={onNextClick}
+      />
     </SafeAreaView>
   );
 }
@@ -46,13 +41,7 @@ const styles = StyleSheet.create({
   container: {
     ...defaultStyles.container,
     flex: 1,
-  },
-  header: {
-    ...defaultStyles.header,
-    flex: 1,
-  },
-  body: {
-    flex: 3,
+    justifyContent: 'center'
   },
   next: {
     ...defaultStyles.button,
