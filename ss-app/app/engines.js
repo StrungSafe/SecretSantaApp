@@ -73,7 +73,8 @@ export const Engines = [{
   // 2
   // For TESTING exception handling
   key: 2,
-  name: 'Exception Testing Engine v1',
+  name: 'v1',
+  testingEngine: true,
   process: () => {
     throw ExceptionTypes.OutOfGifteesException;
   }

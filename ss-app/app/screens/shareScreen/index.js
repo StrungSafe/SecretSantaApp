@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { StyleSheet, SafeAreaView } from 'react-native';
+import { StyleSheet, SafeAreaView, View } from 'react-native';
 import Button from '../../components/button';
-import PageManager from '../../components/pageManager';
+import PageManager from './pageManager';
 import Share from './share';
 
 import defaultStyles from '../styles';
@@ -21,36 +21,34 @@ export default function ShareScreen(props) {
 
   const onResetClick = () => navigation.navigate('Home');
 
-  const viewLength = gifters.length;
-
   return (
     <SafeAreaView
       style={styles.container}
     >
-      <PageManager
-        style={styles.pager}
-        viewId={viewId}
-        setViewId={setViewId}
-      >
-        {
-          gifters.map(gifter =>
-            <Share
-              style={styles.gifter}
-              key={gifter.key}
-              viewId={viewId}
-              viewLength={viewLength}
-              setViewId={setViewId}
-              gifter={gifter}
-              gifters={gifters}
-              results={results}
-            />)
-        }
-      </PageManager>
-      <Button
-        style={styles.startOver}
-        title='Start Over'
-        onPress={onResetClick}
-      />
+      <View style={styles.upper}>
+        <PageManager
+          viewId={viewId}
+          setViewId={setViewId}
+          viewLength={gifters.length}
+        >
+          {
+            gifters.map(gifter =>
+              <Share
+                key={gifter.key}
+                gifter={gifter}
+                gifters={gifters}
+                results={results}
+              />)
+          }
+        </PageManager>
+      </View>
+      <View style={styles.lower}>
+        <Button
+          style={styles.startOver}
+          title='Start Over'
+          onPress={onResetClick}
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -61,9 +59,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  pager: {
+  upper: {
+    flex: 3,
+    paddingTop: 25,
   },
-  gifter: {
+  lower: {
+    flex: 1
   },
   startOver: {
     ...defaultStyles.button,

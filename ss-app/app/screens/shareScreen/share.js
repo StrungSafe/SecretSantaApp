@@ -8,9 +8,6 @@ import defaultStyles from '../styles';
 
 export default function Share(props) {
     const {
-        viewId,
-        viewLength,
-        setViewId,
         gifter,
         gifters,
         results,
@@ -22,20 +19,15 @@ export default function Share(props) {
     const showButtonTitle = showing ? 'Hide' : 'Show';
     const shareButtonTitle = sharing ? 'Hide' : 'Share';
     const giftee = gifters.find(m => m.value === results[gifter.value]);
-    const onPress = value => {
-        setShowing(false);
-        setSharing(false);
-        setViewId(prev => prev + value);
-    }
     return (
         <View
             style={styles.container}
             key={gifter.key}
         >
-            <Text style={styles.name}>{gifter.name}</Text>
+            <Text style={styles.gifter}>{gifter.name}</Text>
 
             <Button style={styles.show} title={showButtonTitle} onPress={() => setShowing(prev => !prev)} />
-            {showing && <Text>{giftee.name}</Text>}
+            {showing && <Text style={styles.giftee}>{giftee.name}</Text>}
 
             <Button style={styles.share} title={shareButtonTitle} onPress={() => setSharing(prev => !prev)} />
             {sharing &&
@@ -44,7 +36,6 @@ export default function Share(props) {
                     value={JSON.stringify({ type: MessageAppCodeType, gifter, giftee })}
                 />
             }
-            
         </View>
     );
 }
@@ -52,7 +43,16 @@ export default function Share(props) {
 const styles = StyleSheet.create({
     container: {
     },
-    name: {
+    gifter: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 75,
+    },
+    giftee: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 20,
+        paddingVertical: 25,
     },
     show: {
         ...defaultStyles.button,
@@ -61,19 +61,7 @@ const styles = StyleSheet.create({
         ...defaultStyles.button,
     },
     code: {
-        ...defaultStyles.button,
+        alignItems: 'center',
+        paddingTop: 10,
     },
-    backNext: {
-        flexDirection: 'row',
-        width: '66%',
-        alignContent: 'center'
-    },
-    back: {
-        ...defaultStyles.button,
-        flex: 1,
-    },
-    next: {
-        ...defaultStyles.button,
-        flex: 1,
-    }
 });

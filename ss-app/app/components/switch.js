@@ -8,9 +8,11 @@ export default function SwitchWrapper(props) {
         disabled,
     } = props;
 
+    const labelStyle = disabled ? { ...styles.label, ...styles.disabledLabel } : styles.label;
+
     return (
         <View style={styles.container}>
-            <Text style={styles.label}>{text}</Text>
+            <Text style={labelStyle} disabled={disabled}>{text}</Text>
             <Switch
                 style={styles.switch}
                 onValueChange={onValueChange}
@@ -28,6 +30,9 @@ const styles = StyleSheet.create({
     label: {
         alignSelf: 'center',
         flex: 1,
+    },
+    disabledLabel: {
+        color: 'gray',
     },
     switch: {
         flex: 1,
