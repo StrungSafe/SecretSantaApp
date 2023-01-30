@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { StyleSheet, SafeAreaView, View } from 'react-native';
+import { useState, useEffect } from 'react';
+import { StyleSheet, SafeAreaView, View, Alert } from 'react-native';
 import Button from '../../components/button';
 import PageManager from './pageManager';
 import Share from './share';
@@ -19,7 +19,38 @@ export default function ShareScreen(props) {
 
   const [viewId, setViewId] = useState(0);
 
-  const onResetClick = () => navigation.navigate('Home');
+  const onHomeClick = () => navigation.navigate('Home');
+
+  useEffect(
+    () =>
+      navigation.addListener('beforeRemove', (e) => {
+        // if (!hasUnsavedChanges) {
+        //   // If we don't have unsaved changes, then we don't need to do anything
+        //   return;
+        // }
+        console.log(e.data.action.payload);
+
+        // Prevent default behavior of leaving the screen
+        e.preventDefault();
+
+        // Prompt the user before leaving the screen
+        Alert.alert(
+          'Discard changes?',
+          'You have unsaved changes. Are you sure to discard them and leave the screen?',
+          [
+            { text: "Don't leave", style: 'cancel', onPress: () => {} },
+            {
+              text: 'Discard',
+              style: 'destructive',
+              // If the user confirmed, then we dispatch the action we blocked earlier
+              // This will continue the action that had triggered the removal of the screen
+              onPress: () => navigation.dispatch(e.data.action),
+            },
+          ]
+        );
+      }),
+    [navigation]
+  );
 
   return (
     <SafeAreaView
@@ -46,7 +77,7 @@ export default function ShareScreen(props) {
         <Button
           style={styles.startOver}
           title='Start Over'
-          onPress={onResetClick}
+          onPress={onHomeClick}
         />
       </View>
     </SafeAreaView>
