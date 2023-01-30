@@ -26,7 +26,7 @@ export default function SettingsScreen(props) {
   useEffect(() => {
     var e = engineFactory(settings.engine);
     setEngine(e);
-  }, [settings.engine])
+  }, [settings.engine]);
 
   return (
     <SafeAreaView style={styles.container}>

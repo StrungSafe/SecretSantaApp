@@ -1,6 +1,5 @@
 import { StyleSheet, View } from 'react-native';
 import Button from '../../components/button';
-import defaultStyles from '../styles';
 
 export default function PageManager(props) {
     const {
